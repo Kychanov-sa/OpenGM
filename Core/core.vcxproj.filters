@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="clang.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fpu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="registers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="registers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gmfuncs_clang.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gmfuncs_fpu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gmfuncs_sse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gmshuf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gmtypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+    <Text Include="DoNotPublish.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7893b7ef-efe7-41f8-811a-fdc533acb335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2eae5186-7c3e-4075-bfb4-80720281bc8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inline Files">
+      <UniqueIdentifier>{42c7e545-8b50-432f-bf6d-e385a1d638e9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gmfuncs.inl">
+      <Filter>Inline Files</Filter>
+    </None>
+    <None Include="gmshuf.inl">
+      <Filter>Inline Files</Filter>
+    </None>
+    <None Include="gmtypes.inl">
+      <Filter>Inline Files</Filter>
+    </None>
+    <None Include="gmconvert.inl">
+      <Filter>Inline Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
