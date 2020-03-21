@@ -15,7 +15,7 @@ namespace CoreTest
 		{
 		}
 
-		TEST_METHOD(abs2_ForAllPositoveValues)
+		TEST_METHOD(abs2_ForAllPositiveValues)
 		{
 			float2 v(1.0f, 2.0f);
 			auto r = abs2(v);
@@ -46,7 +46,7 @@ namespace CoreTest
 			VectorAssert::IsAroundZero(r);
 		}
 
-		TEST_METHOD(abs3_ForAllPositoveValues)
+		TEST_METHOD(abs3_ForAllPositiveValues)
 		{
 			float3 v(1.0f, 2.0f, 3.0f);
 			auto r = abs3(v);
@@ -77,7 +77,7 @@ namespace CoreTest
 			VectorAssert::IsAroundZero(r);
 		}
 
-		TEST_METHOD(abs4_ForAllPositoveValues)
+		TEST_METHOD(abs4_ForAllPositiveValues)
 		{
 			float4 v(1.0f, 2.0f, 3.0f, 4.0f);
 			auto r = abs4(v);

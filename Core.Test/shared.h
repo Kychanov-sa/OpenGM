@@ -163,4 +163,33 @@ namespace CoreTest
 			Assert::IsTrue(wCoordCondition, message ? message : wstring(L"W coordinate of vector is not zero").c_str(), pLineInfo);
 		}
 	};	
+
+	class ScalarAssert
+	{
+	public:
+		static void AreEquals(const float& v1, const float& v2, float epsilon = FLOAT_DEFAULT_EPSILON, const wchar_t* message = NULL, const __LineInfo* pLineInfo = NULL)
+		{
+			Assert::AreEqual(v1, v2, epsilon);
+		}
+
+		static void IsPositive(const float& v, const wchar_t* message = NULL, const __LineInfo* pLineInfo = NULL)
+		{
+			Assert::IsTrue(v >= 0.0f, message ? message : wstring(L"Scalar value is negative").c_str(), pLineInfo);
+		}
+
+		static void IsNegative(const float& v, const wchar_t* message = NULL, const __LineInfo* pLineInfo = NULL)
+		{
+			Assert::IsTrue(v < 0.0f, message ? message : wstring(L"Scalar value is positive").c_str(), pLineInfo);
+		}
+
+		static void IsZero(const float& v, const wchar_t* message = NULL, const __LineInfo* pLineInfo = NULL)
+		{
+			Assert::IsTrue(v == 0.0f, message ? message : wstring(L"Scalar value is not zero").c_str(), pLineInfo);
+		}
+
+		static void IsAroundZero(const float& v, const wchar_t* message = NULL, const __LineInfo* pLineInfo = NULL)
+		{
+			Assert::IsTrue(fabs(v) < GM_EPS, message ? message : wstring(L"Scalar value is not zero").c_str(), pLineInfo);
+		}
+	};
 }

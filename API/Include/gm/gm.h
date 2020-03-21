@@ -35,7 +35,11 @@ namespace OpenGm
 #ifndef CDECL
 #	define CDECL __cdecl
 #endif
+#if _MSVC_LANG > 201402L
+#	define NODISCARD			[[nodiscard]]
+#else
 #	define NODISCARD
+#endif
 #	define DECLALIGN16			__declspec(align(16))
 #	define DECLALIGN32			__declspec(align(32))
 #	define DECLALIGN64			__declspec(align(64))
@@ -103,7 +107,6 @@ const uint32_t GM_1_AS_INT = 0x3F800000;
 	#define ceil4			ceil4_clang
 	#define cross3			cross3_clang
 	#define cross4			cross4_clang
-	#define degrees			degrees_clang
 	#define determinant2x2	determinant2x2_clang
 	#define determinant3x3	determinant3x3_clang
 	#define determinant4x4	determinant4x4_clang
@@ -143,7 +146,6 @@ const uint32_t GM_1_AS_INT = 0x3F800000;
 	#define normalize3		normalize3_clang
 	#define normalize4		normalize4_clang
 	#define normal3			normal3_clang
-	#define radians			radians_clang
 	#define reflect2		reflect2_clang
 	#define reflect3		reflect3_clang
 	#define reflect4		reflect4_clang
@@ -172,7 +174,6 @@ const uint32_t GM_1_AS_INT = 0x3F800000;
 	#define ceil4			ceil4_clang
 	#define cross3			cross3_clang
 	#define cross4			cross4_clang
-	#define degrees			degrees_clang
 	#define determinant2x2	determinant2x2_clang
 	#define determinant3x3	determinant3x3_clang
 	#define determinant4x4	determinant4x4_clang
@@ -212,7 +213,6 @@ const uint32_t GM_1_AS_INT = 0x3F800000;
 	#define normalize3		normalize3_clang
 	#define normalize4		normalize4_clang
 	#define normal3			normal3_clang
-	#define radians			radians_clang
 	#define reflect2		reflect2_clang
 	#define reflect3		reflect3_clang
 	#define reflect4		reflect4_clang
@@ -227,11 +227,15 @@ const uint32_t GM_1_AS_INT = 0x3F800000;
 	#define transpose4x4a	transpose4x4_clang	
 #endif
 
-INLINE float fmax(float x, float y);
-INLINE float fmax(float x, float y, float z);
-INLINE float fmax(float x, float y, float z, float w);
-INLINE float fmin(float x, float y);
-INLINE float fmin(float x, float y, float z);
+/// <summary>
+/// Returns max value.
+/// </summary>
+INLINE float fmax2(float x, float y);
+INLINE float fmax3(float x, float y, float z);
+INLINE float fmax4(float x, float y, float z, float w);
+INLINE float fmin2(float x, float y);
+INLINE float fmin3(float x, float y, float z);
+INLINE float fmin4(float x, float y, float z, float w);
 INLINE void fsincos(const float angle, float& sine, float cosine);
 INLINE float finvsqrt(const float& f);
 INLINE float fsign(float f);

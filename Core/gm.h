@@ -227,15 +227,51 @@ const uint32_t GM_1_AS_INT = 0x3F800000;
 	#define transpose4x4a	transpose4x4_clang	
 #endif
 
-INLINE float fmax(float x, float y);
-INLINE float fmax(float x, float y, float z);
-INLINE float fmax(float x, float y, float z, float w);
-INLINE float fmin(float x, float y);
-INLINE float fmin(float x, float y, float z);
-INLINE void fsincos(const float angle, float& sine, float cosine);
-INLINE float finvsqrt(const float& f);
+/// <summary>
+/// Returns max of two values.
+/// </summary>
+INLINE float fmax2(float x, float y);
+
+/// <summary>
+/// Returns max of three values.
+/// </summary>
+INLINE float fmax3(float x, float y, float z);
+
+/// <summary>
+/// Returns max of four values.
+/// </summary>
+INLINE float fmax4(float x, float y, float z, float w);
+
+/// <summary>
+/// Returns max of min values.
+/// </summary>
+INLINE float fmin2(float x, float y);
+
+/// <summary>
+/// Returns max of three values.
+/// </summary>
+INLINE float fmin3(float x, float y, float z);
+
+/// <summary>
+/// Returns max of four values.
+/// </summary>
+INLINE float fmin4(float x, float y, float z, float w);
+
+/// <summary>
+/// Returns sine and cosine of angle.
+/// </summary>
+INLINE void fsincos(const float angle, float* sine, float* cosine);
+
+/// <summary>
+/// Returns sing of value.
+/// </summary>
 INLINE float fsign(float f);
+
+/// <summary>
+/// Returns reciprocal square root.
+/// </summary>
 INLINE float frsqrt(const float& f);
+
 #include "gmfuncs.inl"
 
 class Convert
