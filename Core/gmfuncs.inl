@@ -61,17 +61,49 @@ INLINE void fsincos(const float angle, float& sine, float cosine)
 #endif
 }
 
-INLINE float frsqrt(const float& f)
-{
-	uint32_t tmp = ((GM_1_AS_INT << 1) + GM_1_AS_INT - *(uint32_t *)&f) >> 1;
-	float y = *(float*)&tmp;
-	return y * (1.47f - 0.47f * f * y * y);
-}
+const __m128  f3 = _mm_set_ss(3.0f);  // 3 as single precision SSE value
+const __m128  f05 = _mm_set_ss(0.5f);  // 0.5 as single precision SSE value
 
-#if 0
-#include <xmmintrin.h>
-INLINE float finvsqrt(const float& value)
+INLINE float frsqrt(const float& value)
 {
+#if defined(_WIN64) || defined(__x86_64__) || defined(_M_X64)
+	uint32_t tmp = ((GM_1_AS_INT << 1) + GM_1_AS_INT - *(uint32_t*)&f) >> 1;
+	float y = *(float*)&tmp;
+	return y * (1.47f - 0.47f * value * y * y);
+
+#if false
+	union {
+		float vh;
+		int i0;
+	};
+
+	union {
+		float vr;
+		int i1;
+	};
+
+	vh = value * 0.5f;
+	i1 = 0x5f3759df - (i0 >> 1);
+	return vr * (1.5f - vh * vr * vr);
+#endif
+
+#else
+	float r;
+	__m128  xx = _mm_load_ss(&value);
+	__m128  xr = _mm_rsqrt_ss(xx);
+	__m128  xt;
+
+	xt = _mm_mul_ss(xr, xr);
+	xt = _mm_mul_ss(xt, xx);
+	xt = _mm_sub_ss(f3, xt);
+	xt = _mm_mul_ss(xt, f05);
+	xr = _mm_mul_ss(xr, xt);
+
+	_mm_store_ss(&r, xr);
+
+	return r;
+
+#if false
 	const __m128 fOneHalf = _mm_set_ss(0.5f);
 	__m128 Y0, X0, X1, X2, FOver2;
 	float temp;
@@ -86,8 +118,9 @@ INLINE float finvsqrt(const float& value)
 	X2 = _mm_add_ss(X1, _mm_mul_ss(X1, X2));
 	_mm_store_ss(&temp, X2);
 	return temp;
-}
 #endif
+#endif
+}
 
 INLINE float fsign(float f)
 {
@@ -101,20 +134,3 @@ INLINE float fsign(float f)
 	result.u32 = (value.u32 & 0x80000000) | (0x3f800000);
 	return result.f32;
 }
-
-//INLINE float frsqrt(const float& f)
-//{
-//	union {
-//		float vh;
-//		int i0;
-//	};
-//
-//	union {
-//		float vr;
-//		int i1;
-//	};
-//
-//	vh = f * 0.5f;
-//	i1 = 0x5f3759df - (i0 >> 1);
-//	return vr * (1.5f - vh * vr * vr);
-//}

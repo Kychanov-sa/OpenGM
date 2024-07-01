@@ -1,10 +1,8 @@
 #include "stdafx.h"
 #include "shared.h"
-#include "CppUnitTest.h"
-#include <gm\gm.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-using namespace OpenGm;
+using namespace GlacialBytes::OpenGm;
 
 namespace CoreTest
 {

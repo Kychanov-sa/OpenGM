@@ -11,6 +11,5 @@
 #include <windows.h>
 #include <stdio.h>
 
-#include "gm.h"
-
 // TODO: reference additional headers your program requires here
+#include "gm.h"

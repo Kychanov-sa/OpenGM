@@ -3,7 +3,7 @@
 /// </summary>
 /// <author>Stanislav A. Kychanov (kychanov.sa@gmail.com)</author>
 /// <created>12-07-2004</created>
-/// <copyright>Copyright 2004-2018 Glacial Bytes. All Rights reserved.</copyright>
+/// <copyright>Copyright 2004-2024 Glacial Bytes. All Rights reserved.</copyright>
 /// <notes></<notes>
 #ifdef GMSHUF_H
 	#error Nested inclusion of gmshuf.h

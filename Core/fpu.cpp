@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "registers.h"
-using namespace OpenGm;
+
+using namespace GlacialBytes::OpenGm;
 //
 //#ifndef _WIN64
 //
