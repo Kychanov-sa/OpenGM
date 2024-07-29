@@ -201,6 +201,7 @@ xcopy $(ProjectDir)*.inl $(SolutionDir)API\Include\gm\*.inl /e /y /exclude:$(Pro
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="clang.cpp" />
+    <ClCompile Include="convert.cpp" />
     <ClCompile Include="fpu.cpp" />
     <ClCompile Include="gm.cpp" />
     <ClCompile Include="registers.cpp" />

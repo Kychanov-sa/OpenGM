@@ -7,7 +7,7 @@ using namespace GlacialBytes::OpenGm;
 
 namespace CoreTest
 {
-#define FLOAT_DEFAULT_EPSILON	0.0000000001f
+	constexpr auto FLOAT_DEFAULT_EPSILON = 0.0000000001f;
 
 	class VectorAssert
 	{

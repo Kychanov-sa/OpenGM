@@ -200,327 +200,333 @@ namespace GlacialBytes
     /// <summary>
     /// Абсолютное значение компонент вектора.
     /// </summary>
-    const auto& abs2 = abs2_clang;
+    constexpr auto& abs2 = abs2_clang;
 
     /// <summary>
     /// Абсолютное значение компонент вектора.
     /// </summary>
-    const auto& abs3 = abs3_clang;
+    constexpr auto& abs3 = abs3_clang;
 
     /// <summary>
     /// Абсолютное значение компонент вектора.
     /// </summary>
-    const auto& abs4 = abs4_clang;
+    constexpr auto& abs4 = abs4_clang;
 
     /// <summary>
     /// Возвращает true, если все компоненты верктора не равны нулю.
     /// </summary>
-    const auto& all2 = all2_clang;
+    constexpr auto& all2 = all2_clang;
 
     /// <summary>
     /// Возвращает true, если все компоненты верктора не равны нулю.
     /// </summary>
-    const auto& all3 = all3_clang;
+    constexpr auto& all3 = all3_clang;
 
     /// <summary>
     /// Возвращает true, если все компоненты верктора не равны нулю.
     /// </summary>
-    const auto& all4 = all4_clang;
+    constexpr auto& all4 = all4_clang;
 
     /// <summary>
     /// Возвращает true, если хоть один компонент верктора не равен нулю.
     /// </summary>
-    const auto& any2 = any2_clang;
+    constexpr auto& any2 = any2_clang;
 
     /// <summary>
     /// Возвращает true, если хоть один компонент верктора не равен нулю.
     /// </summary>
-    const auto& any3 = any3_clang;
+    constexpr auto& any3 = any3_clang;
 
     /// <summary>
     /// Возвращает true, если хоть один компонент верктора не равен нулю.
     /// </summary>
-    const auto& any4 = any4_clang;
+    constexpr auto& any4 = any4_clang;
 
     /// <summary>
     /// Приводит компоненты вектора к наименьшему целому числу, которое большее или равно значению компоненты.
     /// </summary>
-    const auto& ceil2 = ceil2_clang;
+    constexpr auto& ceil2 = ceil2_clang;
 
     /// <summary>
     /// Приводит компоненты вектора к наименьшему целому числу, которое большее или равно значению компоненты.
     /// </summary>
-    const auto& ceil3 = ceil3_clang;
+    constexpr auto& ceil3 = ceil3_clang;
 
     /// <summary>
     /// Приводит компоненты вектора к наименьшему целому числу, которое большее или равно значению компоненты.
     /// </summary>
-    const auto& ceil4 = ceil4_clang;
+    constexpr auto& ceil4 = ceil4_clang;
 
     /// <summary>
     /// Векторное произведение.
     /// </summary>
-    const auto& cross3 = cross3_clang;
+    constexpr auto& cross3 = cross3_clang;
 
     /// <summary>
     /// Векторное произведение. Компонента w будет равна 1.0.
     /// </summary>
-    const auto& cross4 = cross4_clang;
+    constexpr auto& cross4 = cross4_clang;
 
     /// <summary>
     /// Рассчитывает детерминант матрицы.
     /// </summary>
-    const auto& determinant2x2 = determinant2x2_clang;
+    constexpr auto& determinant2x2 = determinant2x2_clang;
 
     /// <summary>
     /// Рассчитывает детерминант матрицы.
     /// </summary>
-    const auto& determinant3x3 = determinant3x3_clang;
+    constexpr auto& determinant3x3 = determinant3x3_clang;
 
     /// <summary>
     /// Рассчитывает детерминант матрицы.
     /// </summary>
-    const auto& determinant4x4 = determinant4x4_clang;
+    constexpr auto& determinant4x4 = determinant4x4_clang;
 
     /// <summary>
     /// Рассчитывает расстояние между двумя точками на плоскости.
     /// </summary>
-    const auto& distance2 = distance2_clang;
+    constexpr auto& distance2 = distance2_clang;
 
     /// <summary>
     /// Рассчитывает расстояние между двумя точками в объёме.
     /// </summary>
-    const auto& distance3 = distance3_clang;
+    constexpr auto& distance3 = distance3_clang;
 
     /// <summary>
     /// Рассчитывает расстояние между двумя точками в объёме. Координата w игнорируется.
     /// </summary>
-    const auto& distance4 = distance4_clang;
+    constexpr auto& distance4 = distance4_clang;
 
     /// <summary>
     /// Возвращает вектор коэффициентов дистанции равный [1.0f, d, d*d, 1.0f / d].
     /// </summary>
-    const auto& dst = dst_clang;
+    constexpr auto& dst = dst_clang;
 
     /// <summary>
     /// Скалярное произведение.
     /// </summary>
-    const auto& dot2 = dot2_clang;
+    constexpr auto& dot2 = dot2_clang;
 
     /// <summary>
     /// Скалярное произведение.
     /// </summary>
-    const auto& dot3 = dot3_clang;
+    constexpr auto& dot3 = dot3_clang;
 
     /// <summary>
     /// Скалярное произведение.
     /// </summary>
-    const auto& dot4 = dot4_clang;
+    constexpr auto& dot4 = dot4_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& faceforward2 = faceforward2_clang;
+    constexpr auto& faceforward2 = faceforward2_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& faceforward3 = faceforward3_clang;
+    constexpr auto& faceforward3 = faceforward3_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& faceforward4 = faceforward4_clang;
+    constexpr auto& faceforward4 = faceforward4_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& floor2 = floor2_clang;
+    constexpr auto& floor2 = floor2_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& floor3 = floor3_clang;
+    constexpr auto& floor3 = floor3_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& floor4 = floor4_clang;
+    constexpr auto& floor4 = floor4_clang;
+
+    /// <summary>
+    /// Вычисляет обратную матрицу 2x2.
+    /// </summary>
+    /// <param name="m">Исходная матрица.</param>
+    /// <returns>Обратная матрица.</returns>
+    constexpr auto& inverse2x2 = inverse2x2_clang;
+
+    /// <summary>
+    /// Вычисляет обратную матрицу 3x3.
+    /// </summary>
+    /// <param name="m">Исходная матрица.</param>
+    /// <returns>Обратная матрица.</returns>
+    constexpr auto& inverse3x3 = inverse3x3_clang;
+
+    /// <summary>
+    /// Вычисляет обратную матрицу 4x4.
+    /// </summary>
+    /// <param name="m">Исходная матрица.</param>
+    /// <returns>Обратная матрица.</returns>
+    constexpr auto& inverse4x4 = inverse4x4_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& inverse2x2 = inverse2x2_clang;
+    constexpr auto& length2 = length2_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& inverse3x3 = inverse3x3_clang;
+    constexpr auto& length3 = length3_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& inverse4x4 = inverse4x4_clang;
+    constexpr auto& length4 = length4_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& length2 = length2_clang;
+    constexpr auto& lerp2 = lerp2_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& length3 = length3_clang;
+    constexpr auto& lerp3 = lerp3_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& length4 = length4_clang;
+    constexpr auto& lerp4 = lerp4_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& lerp2 = lerp2_clang;
+    constexpr auto& mad2 = mad2_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& lerp3 = lerp3_clang;
+    constexpr auto& mad3 = mad3_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& lerp4 = lerp4_clang;
+    constexpr auto& mad4 = mad4_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& mad2 = mad2_clang;
+    constexpr auto& mul2x2 = mul2x2_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& mad3 = mad3_clang;
+    constexpr auto& mul3x3 = mul3x3_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& mad4 = mad4_clang;
+    constexpr auto& mul4x4 = mul4x4_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& mul2x2 = mul2x2_clang;
+    constexpr auto& mul2 = mul2_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& mul3x3 = mul3x3_clang;
+    constexpr auto& mul3 = mul3_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& mul4x4 = mul4x4_clang;
+    constexpr auto& mul4 = mul4_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& mul2 = mul2_clang;
+    constexpr auto& mul43 = mul43_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& mul3 = mul3_clang;
+    constexpr auto& normalize2 = normalize2_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& mul4 = mul4_clang;
+    constexpr auto& normalize3 = normalize3_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& mul43 = mul43_clang;
+    constexpr auto& normalize4 = normalize4_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& normalize2 = normalize2_clang;
+    constexpr auto& normal3 = normal3_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& normalize3 = normalize3_clang;
+    constexpr auto& reflect2 = reflect2_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& normalize4 = normalize4_clang;
+    constexpr auto& reflect3 = reflect3_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& normal3 = normal3_clang;
+    constexpr auto& reflect4 = reflect4_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& reflect2 = reflect2_clang;
+    constexpr auto& refract2 = refract2_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& reflect3 = reflect3_clang;
+    constexpr auto& refract3 = refract3_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& reflect4 = reflect4_clang;
+    constexpr auto& refract4 = refract4_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& refract2 = refract2_clang;
+    constexpr auto& round2 = round2_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& refract3 = refract3_clang;
+    constexpr auto& round3 = round3_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& refract4 = refract4_clang;
+    constexpr auto& round4 = round4_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& round2 = round2_clang;
+    constexpr auto& transpose2x2 = transpose2x2_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& round3 = round3_clang;
+    constexpr auto& transpose3x3 = transpose3x3_clang;
 
     /// <summary>
     /// 
     /// </summary>
-    const auto& round4 = round4_clang;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    const auto& transpose2x2 = transpose2x2_clang;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    const auto& transpose3x3 = transpose3x3_clang;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    const auto& transpose4x4a = transpose4x4_clang;
+    constexpr auto& transpose4x4a = transpose4x4_clang;
 
     /// <summary>
     /// Returns max of two values.
@@ -551,11 +557,6 @@ namespace GlacialBytes
     /// Returns max of four values.
     /// </summary>
     INLINE float fmin4(float x, float y, float z, float w);
-
-    /// <summary>
-    /// Returns sine and cosine of angle.
-    /// </summary>
-    INLINE void fsincos(const float angle, float* sine, float* cosine);
 
     /// <summary>
     /// Returns sing of value.

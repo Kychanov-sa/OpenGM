@@ -43,31 +43,13 @@ INLINE float fmin4(float x, float y, float z, float w)
 	return r < w ? r : w;
 }
 
-INLINE void fsincos(const float angle, float& sine, float cosine)
-{
-#if defined(_WIN64) || defined(__x86_64__) || defined(_M_X64)
-	sine = fsin(x);
-	cosine = fcos(x);
-#else
-	__asm
-	{
-		fld		dword ptr[angle]
-		fsincos
-		mov		eax, dword ptr[cosine]
-		fstp	dword ptr[eax]
-		mov		eax, dword ptr[sine]
-		fstp	dword ptr[eax]
-	}
-#endif
-}
-
 const __m128  f3 = _mm_set_ss(3.0f);  // 3 as single precision SSE value
 const __m128  f05 = _mm_set_ss(0.5f);  // 0.5 as single precision SSE value
 
 INLINE float frsqrt(const float& value)
 {
 #if defined(_WIN64) || defined(__x86_64__) || defined(_M_X64)
-	uint32_t tmp = ((GM_1_AS_INT << 1) + GM_1_AS_INT - *(uint32_t*)&f) >> 1;
+	uint32_t tmp = ((GM_1_AS_INT << 1) + GM_1_AS_INT - *(uint32_t*)&value) >> 1;
 	float y = *(float*)&tmp;
 	return y * (1.47f - 0.47f * value * y * y);
 

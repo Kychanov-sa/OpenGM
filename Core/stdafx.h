@@ -12,4 +12,5 @@
 #include <stdio.h>
 
 // TODO: reference additional headers your program requires here
+#define GM_BUILDING_LIB
 #include "gm.h"

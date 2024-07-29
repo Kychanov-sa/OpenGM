@@ -11,9 +11,6 @@
 	#define GMCONVERT_INL
 #endif
 
-const __declspec(align(16)) float Convert::rad2deg = (180.0f / GM_PI);
-const __declspec(align(16)) float Convert::deg2rad = (GM_PI / 180.0f);
-
 INLINE int FASTCALL Convert::FloatToInt(const float value) noexcept
 {
 	const int magic = (150 << 23) | (1 << 22);

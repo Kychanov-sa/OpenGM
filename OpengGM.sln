@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2046
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core", "Core\core.vcxproj", "{B926DD08-529F-42EB-801E-519D2ACB56B1}"
 EndProject
@@ -32,7 +32,7 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B926DD08-529F-42EB-801E-519D2ACB56B1}.Debug|Win32.ActiveCfg = Debug|Win32
 		{B926DD08-529F-42EB-801E-519D2ACB56B1}.Debug|Win32.Build.0 = Debug|Win32
-		{B926DD08-529F-42EB-801E-519D2ACB56B1}.Debug|x64.ActiveCfg = Debug|Win32
+		{B926DD08-529F-42EB-801E-519D2ACB56B1}.Debug|x64.ActiveCfg = Debug|x64
 		{B926DD08-529F-42EB-801E-519D2ACB56B1}.Release|Win32.ActiveCfg = Release|Win32
 		{B926DD08-529F-42EB-801E-519D2ACB56B1}.Release|Win32.Build.0 = Release|Win32
 		{B926DD08-529F-42EB-801E-519D2ACB56B1}.Release|x64.ActiveCfg = Release|x64
@@ -88,32 +88,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BC5F9DC9-F522-4E8A-9731-9CC566979780}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://nehilenium.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Core\\core.vcxproj
-		SccProjectName1 = Core
-		SccLocalPath1 = Core
-		SccProjectUniqueName2 = Core.Test\\Core.Test.vcxproj
-		SccProjectTopLevelParentUniqueName2 = OpengGM.sln
-		SccProjectName2 = Core.Test
-		SccLocalPath2 = Core.Test
-		SccProjectUniqueName3 = Utilities\\Utilities.vcxproj
-		SccProjectName3 = Utilities
-		SccLocalPath3 = Utilities
-		SccProjectUniqueName4 = Auxiliaries\\Auxiliaries.vcxproj
-		SccProjectName4 = Auxiliaries
-		SccLocalPath4 = Auxiliaries
-		SccProjectUniqueName5 = Auxiliaries.Test\\Auxiliaries.Test.vcxproj
-		SccProjectTopLevelParentUniqueName5 = OpengGM.sln
-		SccProjectName5 = Auxiliaries.Test
-		SccLocalPath5 = Auxiliaries.Test
-		SccProjectUniqueName6 = Utilities.Test\\Utilities.Test.vcxproj
-		SccProjectTopLevelParentUniqueName6 = OpengGM.sln
-		SccProjectName6 = Utilities.Test
-		SccLocalPath6 = Utilities.Test
 	EndGlobalSection
 EndGlobal

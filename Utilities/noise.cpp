@@ -37,208 +37,211 @@ float gain(const float a, const float b)
 	else return 1 - float(powf(2 * (1.0f - a), p) / 2);
 }
 
-namespace OpenGm
+namespace GlacialBytes
 {
-	namespace Utilities
+	namespace OpenGm
 	{
-		GMAPI float gmuNoise1(const float s)
+		namespace Utilities
 		{
-			int		bx0, bx1;
-			float	rx0, rx1, sx, t, u, v;
-
-			coord_setup(s, bx0, bx1, rx0, rx1);
-
-			sx = s_curve(rx0);
-			u = rx0 * g1[p[bx0]];
-			v = rx1 * g1[p[bx1]];
-			return ab_lerp(sx, u, v);
-		}
-
-		GMAPI float gmuNoise2(const float2& pnt)
-		{
-			int		bx0, bx1, by0, by1, b00, b10, b01, b11;
-			float	rx0, rx1, ry0, ry1, *q, sx, sy, a, b, t, u, v;
-			int		i, j;
-
-			coord_setup(pnt.x, bx0, bx1, rx0, rx1);
-			coord_setup(pnt.y, by0, by1, ry0, ry1);
-
-			i = p[bx0];
-			j = p[bx1];
-
-			b00 = p[i + by0];
-			b10 = p[j + by0];
-			b01 = p[i + by1];
-			b11 = p[j + by1];
-
-			sx = s_curve(rx0);
-			sy = s_curve(ry0);
-
-
-			q = g2[b00]; u = at2(rx0, ry0);
-			q = g2[b10]; v = at2(rx1, ry0);
-			a = ab_lerp(sx, u, v);
-
-			q = g2[b01]; u = at2(rx0, ry1);
-			q = g2[b11]; v = at2(rx1, ry1);
-			b = ab_lerp(sx, u, v);
-
-			return ab_lerp(sy, a, b);
-		}
-
-		GMAPI float gmuNoise3(const float3& pnt)
-		{
-			int		bx0, bx1, by0, by1, bz0, bz1, b00, b10, b01, b11;
-			float	rx0, rx1, ry0, ry1, rz0, rz1, *q, sy, sz, a, b, c, d, t, u, v;
-			int		i, j;
-
-			coord_setup(pnt.x, bx0, bx1, rx0, rx1);
-			coord_setup(pnt.y, by0, by1, ry0, ry1);
-			coord_setup(pnt.z, bz0, bz1, rz0, rz1);
-
-			i = p[bx0];
-			j = p[bx1];
-
-			b00 = p[i + by0];
-			b10 = p[j + by0];
-			b01 = p[i + by1];
-			b11 = p[j + by1];
-
-			t = s_curve(rx0);
-			sy = s_curve(ry0);
-			sz = s_curve(rz0);
-
-			q = g3[b00 + bz0]; u = at3(rx0, ry0, rz0);
-			q = g3[b10 + bz0]; v = at3(rx1, ry0, rz0);
-			a = ab_lerp(t, u, v);
-
-			q = g3[b01 + bz0]; u = at3(rx0, ry1, rz0);
-			q = g3[b11 + bz0]; v = at3(rx1, ry1, rz0);
-			b = ab_lerp(t, u, v);
-
-			c = ab_lerp(sy, a, b);
-
-			q = g3[b00 + bz1]; u = at3(rx0, ry0, rz1);
-			q = g3[b10 + bz1]; v = at3(rx1, ry0, rz1);
-			a = ab_lerp(t, u, v);
-
-			q = g3[b01 + bz1]; u = at3(rx0, ry1, rz1);
-			q = g3[b11 + bz1]; v = at3(rx1, ry1, rz1);
-			b = ab_lerp(t, u, v);
-
-			d = ab_lerp(sy, a, b);
-
-			return ab_lerp(sz, c, d);
-		}
-
-		GMAPI float gmuTurbulence2(const float2& v, float freq)
-		{
-			float t = 0.0f;
-
-			do
+			GMAPI float gmuNoise1(const float s)
 			{
-				t += gmuNoise2(v*freq) / freq;
-				freq *= 0.5f;
-			} while (freq >= 1.0f);
-			return t;
-		}
+				int		bx0, bx1;
+				float	rx0, rx1, sx, t, u, v;
 
-		GMAPI float gmuTurbulence3(const float3& v, float freq)
-		{
-			float t = 0.0f;
+				coord_setup(s, bx0, bx1, rx0, rx1);
 
-			do
-			{
-				t += gmuNoise3(v*freq) / freq;
-				freq *= 0.5f;
-			} while (freq >= 1.0f);
-			return t;
-		}
-
-		GMAPI float gmuTileableNoise1(const float s, const float w)
-		{
-			return (gmuNoise1(s)     * (w - s) +
-				gmuNoise1(s - w) *      s) / w;
-		}
-
-		GMAPI float gmuTileableNoise2(const float2& v, float w, float h)
-		{
-			return (gmuNoise2(float2(v.x, v.y))     * (w - v.x) * (h - v.y) +
-				gmuNoise2(float2(v.x - w, v.y))     *      v.x  * (h - v.y) +
-				gmuNoise2(float2(v.x, v.y - h)) * (w - v.x) *      v.y +
-				gmuNoise2(float2(v.x - w, v.y - h)) *      v.x  *      v.y) / (w * h);
-		}
-
-		GMAPI float gmuTileableNoise3(const float3& v, float w, float h, float d)
-		{
-			return (gmuNoise3(float3(v.x, v.y, v.z))     * (w - v.x) * (h - v.y) * (d - v.z) +
-				gmuNoise3(float3(v.x - w, v.y, v.z))     *      v.x  * (h - v.y) * (d - v.z) +
-				gmuNoise3(float3(v.x, v.y - h, v.z))     * (w - v.x) *      v.y  * (d - v.z) +
-				gmuNoise3(float3(v.x - w, v.y - h, v.z))     *      v.x  *      v.y  * (d - v.z) +
-				gmuNoise3(float3(v.x, v.y, v.z - d)) * (w - v.x) * (h - v.y) *      v.z +
-				gmuNoise3(float3(v.x - w, v.y, v.z - d)) *      v.x  * (h - v.y) *      v.z +
-				gmuNoise3(float3(v.x, v.y - h, v.z - d)) * (w - v.x) *      v.y  *      v.z +
-				gmuNoise3(float3(v.x - w, v.y - h, v.z - d)) *      v.x  *      v.y  *      v.z) / (w * h * d);
-		}
-
-		GMAPI float gmuTileableTurbulence2(const float2& v, float w, float h, float freq)
-		{
-			float t = 0.0f;
-
-			do
-			{
-				t += gmuTileableNoise2(v*freq, w * freq, h * freq) / freq;
-				freq *= 0.5f;
-			} while (freq >= 1.0f);
-			return t;
-		}
-
-		GMAPI float gmuTileableTurbulence3(const float3& v, float w, float h, float d, float freq)
-		{
-			float t = 0.0f;
-
-			do
-			{
-				t += gmuTileableNoise3(v*freq, w * freq, h * freq, d * freq) / freq;
-				freq *= 0.5f;
-			} while (freq >= 1.0f);
-			return t;
-		}
-
-		GMAPI void gmuRandNoise(int seed)
-		{
-			int i, j, k;
-
-			srand(seed);
-			for (i = 0; i<GMUNOISE_B; ++i)
-			{
-				p[i] = i;
-				g1[i] = (float)((rand() % (GMUNOISE_B + GMUNOISE_B)) - GMUNOISE_B) / GMUNOISE_B;
-
-				for (j = 0; j<2; ++j)
-					g2[i][j] = (float)((rand() % (GMUNOISE_B + GMUNOISE_B)) - GMUNOISE_B) / GMUNOISE_B;
-				normalize2((float2&)g2[i]);
-
-				for (j = 0; j<3; ++j)
-					g3[i][j] = (float)((rand() % (GMUNOISE_B + GMUNOISE_B)) - GMUNOISE_B) / GMUNOISE_B;
-				normalize3((float3&)g3[i]);
+				sx = s_curve(rx0);
+				u = rx0 * g1[p[bx0]];
+				v = rx1 * g1[p[bx1]];
+				return ab_lerp(sx, u, v);
 			}
 
-			while (--i)
+			GMAPI float gmuNoise2(const float2& pnt)
 			{
-				k = p[i];
-				p[i] = p[j = rand() % GMUNOISE_B];
-				p[j] = k;
+				int		bx0, bx1, by0, by1, b00, b10, b01, b11;
+				float	rx0, rx1, ry0, ry1, * q, sx, sy, a, b, t, u, v;
+				int		i, j;
+
+				coord_setup(pnt.x, bx0, bx1, rx0, rx1);
+				coord_setup(pnt.y, by0, by1, ry0, ry1);
+
+				i = p[bx0];
+				j = p[bx1];
+
+				b00 = p[i + by0];
+				b10 = p[j + by0];
+				b01 = p[i + by1];
+				b11 = p[j + by1];
+
+				sx = s_curve(rx0);
+				sy = s_curve(ry0);
+
+
+				q = g2[b00]; u = at2(rx0, ry0);
+				q = g2[b10]; v = at2(rx1, ry0);
+				a = ab_lerp(sx, u, v);
+
+				q = g2[b01]; u = at2(rx0, ry1);
+				q = g2[b11]; v = at2(rx1, ry1);
+				b = ab_lerp(sx, u, v);
+
+				return ab_lerp(sy, a, b);
 			}
 
-			for (i = 0; i<GMUNOISE_B + 2; ++i)
+			GMAPI float gmuNoise3(const float3& pnt)
 			{
-				p[GMUNOISE_B + i] = p[i];
-				g1[GMUNOISE_B + i] = g1[i];
-				for (j = 0; j<2; ++j)
-					g2[GMUNOISE_B + i][j] = g2[i][j];
-				for (j = 0; j<3; ++j)
-					g3[GMUNOISE_B + i][j] = g3[i][j];
+				int		bx0, bx1, by0, by1, bz0, bz1, b00, b10, b01, b11;
+				float	rx0, rx1, ry0, ry1, rz0, rz1, * q, sy, sz, a, b, c, d, t, u, v;
+				int		i, j;
+
+				coord_setup(pnt.x, bx0, bx1, rx0, rx1);
+				coord_setup(pnt.y, by0, by1, ry0, ry1);
+				coord_setup(pnt.z, bz0, bz1, rz0, rz1);
+
+				i = p[bx0];
+				j = p[bx1];
+
+				b00 = p[i + by0];
+				b10 = p[j + by0];
+				b01 = p[i + by1];
+				b11 = p[j + by1];
+
+				t = s_curve(rx0);
+				sy = s_curve(ry0);
+				sz = s_curve(rz0);
+
+				q = g3[b00 + bz0]; u = at3(rx0, ry0, rz0);
+				q = g3[b10 + bz0]; v = at3(rx1, ry0, rz0);
+				a = ab_lerp(t, u, v);
+
+				q = g3[b01 + bz0]; u = at3(rx0, ry1, rz0);
+				q = g3[b11 + bz0]; v = at3(rx1, ry1, rz0);
+				b = ab_lerp(t, u, v);
+
+				c = ab_lerp(sy, a, b);
+
+				q = g3[b00 + bz1]; u = at3(rx0, ry0, rz1);
+				q = g3[b10 + bz1]; v = at3(rx1, ry0, rz1);
+				a = ab_lerp(t, u, v);
+
+				q = g3[b01 + bz1]; u = at3(rx0, ry1, rz1);
+				q = g3[b11 + bz1]; v = at3(rx1, ry1, rz1);
+				b = ab_lerp(t, u, v);
+
+				d = ab_lerp(sy, a, b);
+
+				return ab_lerp(sz, c, d);
+			}
+
+			GMAPI float gmuTurbulence2(const float2& v, float freq)
+			{
+				float t = 0.0f;
+
+				do
+				{
+					t += gmuNoise2(v * freq) / freq;
+					freq *= 0.5f;
+				} while (freq >= 1.0f);
+				return t;
+			}
+
+			GMAPI float gmuTurbulence3(const float3& v, float freq)
+			{
+				float t = 0.0f;
+
+				do
+				{
+					t += gmuNoise3(v * freq) / freq;
+					freq *= 0.5f;
+				} while (freq >= 1.0f);
+				return t;
+			}
+
+			GMAPI float gmuTileableNoise1(const float s, const float w)
+			{
+				return (gmuNoise1(s) * (w - s) +
+					gmuNoise1(s - w) * s) / w;
+			}
+
+			GMAPI float gmuTileableNoise2(const float2& v, float w, float h)
+			{
+				return (gmuNoise2(float2(v.x, v.y)) * (w - v.x) * (h - v.y) +
+					gmuNoise2(float2(v.x - w, v.y)) * v.x * (h - v.y) +
+					gmuNoise2(float2(v.x, v.y - h)) * (w - v.x) * v.y +
+					gmuNoise2(float2(v.x - w, v.y - h)) * v.x * v.y) / (w * h);
+			}
+
+			GMAPI float gmuTileableNoise3(const float3& v, float w, float h, float d)
+			{
+				return (gmuNoise3(float3(v.x, v.y, v.z)) * (w - v.x) * (h - v.y) * (d - v.z) +
+					gmuNoise3(float3(v.x - w, v.y, v.z)) * v.x * (h - v.y) * (d - v.z) +
+					gmuNoise3(float3(v.x, v.y - h, v.z)) * (w - v.x) * v.y * (d - v.z) +
+					gmuNoise3(float3(v.x - w, v.y - h, v.z)) * v.x * v.y * (d - v.z) +
+					gmuNoise3(float3(v.x, v.y, v.z - d)) * (w - v.x) * (h - v.y) * v.z +
+					gmuNoise3(float3(v.x - w, v.y, v.z - d)) * v.x * (h - v.y) * v.z +
+					gmuNoise3(float3(v.x, v.y - h, v.z - d)) * (w - v.x) * v.y * v.z +
+					gmuNoise3(float3(v.x - w, v.y - h, v.z - d)) * v.x * v.y * v.z) / (w * h * d);
+			}
+
+			GMAPI float gmuTileableTurbulence2(const float2& v, float w, float h, float freq)
+			{
+				float t = 0.0f;
+
+				do
+				{
+					t += gmuTileableNoise2(v * freq, w * freq, h * freq) / freq;
+					freq *= 0.5f;
+				} while (freq >= 1.0f);
+				return t;
+			}
+
+			GMAPI float gmuTileableTurbulence3(const float3& v, float w, float h, float d, float freq)
+			{
+				float t = 0.0f;
+
+				do
+				{
+					t += gmuTileableNoise3(v * freq, w * freq, h * freq, d * freq) / freq;
+					freq *= 0.5f;
+				} while (freq >= 1.0f);
+				return t;
+			}
+
+			GMAPI void gmuRandNoise(int seed)
+			{
+				int i, j, k;
+
+				srand(seed);
+				for (i = 0; i < GMUNOISE_B; ++i)
+				{
+					p[i] = i;
+					g1[i] = (float)((rand() % (GMUNOISE_B + GMUNOISE_B)) - GMUNOISE_B) / GMUNOISE_B;
+
+					for (j = 0; j < 2; ++j)
+						g2[i][j] = (float)((rand() % (GMUNOISE_B + GMUNOISE_B)) - GMUNOISE_B) / GMUNOISE_B;
+					normalize2((float2&)g2[i]);
+
+					for (j = 0; j < 3; ++j)
+						g3[i][j] = (float)((rand() % (GMUNOISE_B + GMUNOISE_B)) - GMUNOISE_B) / GMUNOISE_B;
+					normalize3((float3&)g3[i]);
+				}
+
+				while (--i)
+				{
+					k = p[i];
+					p[i] = p[j = rand() % GMUNOISE_B];
+					p[j] = k;
+				}
+
+				for (i = 0; i < GMUNOISE_B + 2; ++i)
+				{
+					p[GMUNOISE_B + i] = p[i];
+					g1[GMUNOISE_B + i] = g1[i];
+					for (j = 0; j < 2; ++j)
+						g2[GMUNOISE_B + i][j] = g2[i][j];
+					for (j = 0; j < 3; ++j)
+						g3[GMUNOISE_B + i][j] = g3[i][j];
+				}
 			}
 		}
 	}

@@ -183,6 +183,103 @@ namespace GlacialBytes
 			return float4(floorf(v.x), floorf(v.y), floorf(v.z), floorf(v.w));
 		}
 
+		float2x2 FASTCALL inverse2x2_clang(const float2x2& m)
+		{
+			double invertedDeterminant = 1.0 / determinant2x2(m);
+
+      float3x3 result;
+      result._11 = m._22 * invertedDeterminant;
+      result._21 = -m._21 * invertedDeterminant;
+      result._12 = -m._12 * invertedDeterminant;
+      result._22 = m._11 * invertedDeterminant;
+      return result;
+		}
+
+		float3x3 FASTCALL inverse3x3_clang(const float3x3& m)
+		{
+			double invertedDeterminant = 1.0 / determinant3x3(m);
+
+			float3x3 result;
+			result._11 = (m._22 * m._33 - m._32 * m._23) * invertedDeterminant;
+			result._12 = (m._13 * m._32 - m._12 * m._33) * invertedDeterminant;
+			result._13 = (m._12 * m._23 - m._13 * m._22) * invertedDeterminant;
+			result._21 = (m._23 * m._31 - m._21 * m._33) * invertedDeterminant;
+			result._22 = (m._11 * m._33 - m._13 * m._31) * invertedDeterminant;
+			result._23 = (m._21 * m._13 - m._11 * m._23) * invertedDeterminant;
+			result._31 = (m._21 * m._32 - m._31 * m._22) * invertedDeterminant;
+			result._32 = (m._31 * m._12 - m._11 * m._32) * invertedDeterminant;
+			result._33 = (m._11 * m._22 - m._21 * m._12) * invertedDeterminant;
+			return result;
+		}
+
+		float4x4 FASTCALL inverse4x4_clang(const float4x4& m)
+		{
+			float determinant, t[3], v[16];
+			uint32_t i, j;
+
+			t[0] = m._m[2][2] * m._m[3][3] - m._m[2][3] * m._m[3][2];
+			t[1] = m._m[1][2] * m._m[3][3] - m._m[1][3] * m._m[3][2];
+			t[2] = m._m[1][2] * m._m[2][3] - m._m[1][3] * m._m[2][2];
+			v[0] = m._m[1][1] * t[0] - m._m[2][1] * t[1] + m._m[3][1] * t[2];
+			v[4] = -m._m[1][0] * t[0] + m._m[2][0] * t[1] - m._m[3][0] * t[2];
+
+			t[0] = m._m[1][0] * m._m[2][1] - m._m[2][0] * m._m[1][1];
+			t[1] = m._m[1][0] * m._m[3][1] - m._m[3][0] * m._m[1][1];
+			t[2] = m._m[2][0] * m._m[3][1] - m._m[3][0] * m._m[2][1];
+			v[8] = m._m[3][3] * t[0] - m._m[2][3] * t[1] + m._m[1][3] * t[2];
+			v[12] = -m._m[3][2] * t[0] + m._m[2][2] * t[1] - m._m[1][2] * t[2];
+
+			determinant = m._m[0][0] * v[0] + m._m[0][1] * v[4] +
+				m._m[0][2] * v[8] + m._m[0][3] * v[12];
+
+			t[0] = m._m[2][2] * m._m[3][3] - m._m[2][3] * m._m[3][2];
+			t[1] = m._m[0][2] * m._m[3][3] - m._m[0][3] * m._m[3][2];
+			t[2] = m._m[0][2] * m._m[2][3] - m._m[0][3] * m._m[2][2];
+			v[1] = -m._m[0][1] * t[0] + m._m[2][1] * t[1] - m._m[3][1] * t[2];
+			v[5] = m._m[0][0] * t[0] - m._m[2][0] * t[1] + m._m[3][0] * t[2];
+
+			t[0] = m._m[0][0] * m._m[2][1] - m._m[2][0] * m._m[0][1];
+			t[1] = m._m[3][0] * m._m[0][1] - m._m[0][0] * m._m[3][1];
+			t[2] = m._m[2][0] * m._m[3][1] - m._m[3][0] * m._m[2][1];
+			v[9] = -m._m[3][3] * t[0] - m._m[2][3] * t[1] - m._m[0][3] * t[2];
+			v[13] = m._m[3][2] * t[0] + m._m[2][2] * t[1] + m._m[0][2] * t[2];
+
+			t[0] = m._m[1][2] * m._m[3][3] - m._m[1][3] * m._m[3][2];
+			t[1] = m._m[0][2] * m._m[3][3] - m._m[0][3] * m._m[3][2];
+			t[2] = m._m[0][2] * m._m[1][3] - m._m[0][3] * m._m[1][2];
+			v[2] = m._m[0][1] * t[0] - m._m[1][1] * t[1] + m._m[3][1] * t[2];
+			v[6] = -m._m[0][0] * t[0] + m._m[1][0] * t[1] - m._m[3][0] * t[2];
+
+			t[0] = m._m[0][0] * m._m[1][1] - m._m[1][0] * m._m[0][1];
+			t[1] = m._m[3][0] * m._m[0][1] - m._m[0][0] * m._m[3][1];
+			t[2] = m._m[1][0] * m._m[3][1] - m._m[3][0] * m._m[1][1];
+			v[10] = m._m[3][3] * t[0] + m._m[1][3] * t[1] + m._m[0][3] * t[2];
+			v[14] = -m._m[3][2] * t[0] - m._m[1][2] * t[1] - m._m[0][2] * t[2];
+
+			t[0] = m._m[1][2] * m._m[2][3] - m._m[1][3] * m._m[2][2];
+			t[1] = m._m[0][2] * m._m[2][3] - m._m[0][3] * m._m[2][2];
+			t[2] = m._m[0][2] * m._m[1][3] - m._m[0][3] * m._m[1][2];
+			v[3] = -m._m[0][1] * t[0] + m._m[1][1] * t[1] - m._m[2][1] * t[2];
+			v[7] = m._m[0][0] * t[0] - m._m[1][0] * t[1] + m._m[2][0] * t[2];
+
+			v[11] = -m._m[0][0] * (m._m[1][1] * m._m[2][3] - m._m[1][3] * m._m[2][1]) +
+				m._m[1][0] * (m._m[0][1] * m._m[2][3] - m._m[0][3] * m._m[2][1]) -
+				m._m[2][0] * (m._m[0][1] * m._m[1][3] - m._m[0][3] * m._m[1][1]);
+
+			v[15] = m._m[0][0] * (m._m[1][1] * m._m[2][2] - m._m[1][2] * m._m[2][1]) -
+				m._m[1][0] * (m._m[0][1] * m._m[2][2] - m._m[0][2] * m._m[2][1]) +
+				m._m[2][0] * (m._m[0][1] * m._m[1][2] - m._m[0][2] * m._m[1][1]);
+
+			float invertedDeterminant = 1.0f / determinant;
+
+			float4x4 result;
+			for (i = 0; i < 4; i++)
+				for (j = 0; j < 4; j++)
+					result._m[i][j] = v[4 * i + j] * invertedDeterminant;
+
+			return result;
+		}
+
 		float FASTCALL length2_clang(const float2& v)
 		{
 			return sqrtf(v.x * v.x + v.y * v.y);

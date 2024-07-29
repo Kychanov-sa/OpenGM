@@ -133,7 +133,7 @@ namespace CoreTest
 		}
 #pragma endregion
 
-#pragma region fsincos
+/*#pragma region fsincos
 		const float fsincos_epsilon = 0.0001f;
 
 		TEST_METHOD(fsincos_0)
@@ -175,7 +175,7 @@ namespace CoreTest
 			ScalarAssert::AreEquals(sine, 0.0f, fsincos_epsilon);
 			ScalarAssert::AreEquals(cosine, 1.0f, fsincos_epsilon);
 		}
-#pragma endregion
+#pragma endregion*/
 
 //#pragma region finvsqrt
 //		const float finvsqrt_epsilon = 0.01f;
